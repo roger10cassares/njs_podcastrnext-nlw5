@@ -91,11 +91,10 @@ import { convertDurationToTimeString } from '../utils/convertDurationToTimeStrin
 
 import styles from './home.module.scss';
 // type or interface is the same
-type Episode ={
+type Episode = {
   id: string;
   title: string;
   thumbnail: string;
-  description: string;
   members: string;
   duration: number;
   durationAsString: string;
@@ -103,7 +102,7 @@ type Episode ={
   publishedAt: string;
 }
 
-type HomeProps ={ 
+type HomeProps = { 
   // episodes: Array<Episode> // sama as bellow
   latestEpisodes: Episode[];
   allEpisodes: Episode[];
@@ -219,7 +218,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
 
   const episodes = data.map(episode => {
-    return{
+    return {
       id: episode.id,
       title: episode.title,
       thumbnail: episode.thumbnail,
@@ -227,7 +226,6 @@ export const getStaticProps: GetStaticProps = async () => {
       publishedAt: format(parseISO(episode.published_at), 'd MMM yy', {locale: ptBR}),
       duration: Number(episode.file.duration),
       durationAsString: convertDurationToTimeString(Number(episode.file.duration)),
-      description: episode.description,
       url: episode.file.url
     }
   })

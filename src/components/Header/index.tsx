@@ -11,7 +11,7 @@ export function Header() {
     });
     return (
         <header className={styles.headerContainer}>
-            <img src="./logo.svg" alt="Podcastr" />
+            <img src="/logo.svg" alt="Podcastr" />
 
             <p>Always the best to you listen, always</p>
 
