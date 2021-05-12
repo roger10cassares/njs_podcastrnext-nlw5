@@ -1,8 +1,10 @@
 import { GetStaticProps, GetStaticPaths } from 'next';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import Link from 'next/link';
+
 import { format, parseISO } from 'date-fns';
-import { ptBR } from 'date-fns/locale/pt-BR';
+import ptBR from 'date-fns/locale/pt-BR';
 import { api } from '../../services/api'; 
 import { convertDurationToTimeString } from '../../utils/convertDurationToTimeString';
 
@@ -31,10 +33,12 @@ export default function Episode({ episode }: EpisodeProps) {
     return (
         <div className={styles.episode}>
             <div className={styles.thumbnailContainer}>
-                <button type="button">
-                    <img src="/arrow-left.svg" alt="Back" />
-                </button>
-
+                <Link href='/'>
+                    <button type="button">
+                        <img src="/arrow-left.svg" alt="Back" />
+                    </button>
+                </Link>
+                
                 <Image 
                     width={700} 
                     height={160} 
@@ -49,9 +53,9 @@ export default function Episode({ episode }: EpisodeProps) {
 
             <header>
                 <h1>{episode.title}</h1>
-                <h1>{episode.members}</h1>
-                <h1>{episode.publishedAt}</h1>
-                <h1>{episode.durationAsString}</h1>
+                <span>{episode.members}</span>
+                <span>{episode.publishedAt}</span>
+                <span>{episode.durationAsString}</span>
             </header>
 
             <div 
