@@ -221,6 +221,8 @@ export const getStaticProps: GetStaticProps = async () => {
     }
   })
 
+  console.log(` D A T A : ${JSON.stringify(data)}`)
+
 
   const episodes = data.map(episode => {
     return {
