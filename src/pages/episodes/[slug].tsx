@@ -71,7 +71,8 @@ export default function Episode({ episode }: EpisodeProps) {
 export const getStaticPaths: GetStaticPaths = async () => {
     return {
         paths: [],
-        fallback: 'blocking'
+        fallback: 'blocking' // Determine pages that would not generated for Static Pages
+        // falback true 
     }
 }
 

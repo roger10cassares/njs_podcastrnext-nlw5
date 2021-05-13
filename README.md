@@ -1,6 +1,6 @@
 # njs_podcastrnext-nlw5
 
-Aula 04 --> 00h00
+Aula 04 --> 57m
 
 yarn add typescript @types/react @types/node -D 
 -D dev dependency
@@ -14,3 +14,5 @@ package.json -> create script named "server"
 
 
 yarn add axios
+
+yarn add rc-slider

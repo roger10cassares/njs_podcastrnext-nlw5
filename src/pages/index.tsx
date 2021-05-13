@@ -82,14 +82,16 @@ export async function getStaticProps() {
 
 
 import { GetStaticProps } from 'next';
+import { convertDurationToTimeString } from '../utils/convertDurationToTimeString';
+import { useContext } from 'react';
 import Image from 'next/image'; // Manage with jpg and pngs in Next!
 import Link from 'next/link';
 import { api } from '../services/api';
 import { format, parseISO } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR'
-import { convertDurationToTimeString } from '../utils/convertDurationToTimeString';
 
 import styles from './home.module.scss';
+import { PlayerContext } from '../contexts/PlayerContext';
 // type or interface is the same
 type Episode = {
   id: string;
@@ -109,6 +111,8 @@ type HomeProps = {
 }
 
 export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
+  const { play } = useContext(PlayerContext)
+
 
 // FORMAT THE DATA BEFORE THA DATA ARRIVED IN COMPONENT TO DISCOURAGE THE RENDERING EVERYTIME. Fotmat data very after the api response
   return (
@@ -140,7 +144,8 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                   <span>{episode.durationAsString}</span>
                 </div>
 
-                <button type="button">
+                {/* Functions that need parameters, we need to pass not just the name, but () => play(episode) */}
+                <button type="button" onClick={() => play(episode)}>
                   <img src="/play-green.svg" alt="Play the episode" />
                 </button>
 
