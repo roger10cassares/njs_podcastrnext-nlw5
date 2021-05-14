@@ -248,5 +248,4 @@ export const getStaticProps: GetStaticProps = async () => {
     },
     revalidate: 60 * 60 *8, //each 8 hours, a new api call will be fetchedwhen a new person access the page! 3 times a day.
   }
-
 }

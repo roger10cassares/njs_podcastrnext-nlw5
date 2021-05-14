@@ -2,10 +2,11 @@
 import { useContext, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { PlayerContext } from '../../contexts/PlayerContext';
-import styles from './styles.module.scss';
 import Slider from 'rc-slider';
 
+import styles from './styles.module.scss';
 import 'rc-slider/assets/index.css';
+
 
 export function Player() {
     //audio element just created in the screen when the file is playes
@@ -29,7 +30,6 @@ export function Player() {
         } else {
             audioRef.current.pause();
         }
-
     }, [isPlaying])
 
     const episode = episodeList[currentEpisodeIndex]
