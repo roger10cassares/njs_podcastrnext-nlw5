@@ -83,7 +83,6 @@ export async function getStaticProps() {
 
 import { GetStaticProps } from 'next';
 import { convertDurationToTimeString } from '../utils/convertDurationToTimeString';
-import { useContext } from 'react';
 import Image from 'next/image'; // Manage with jpg and pngs in Next!
 import Link from 'next/link';
 import { api } from '../services/api';
@@ -91,7 +90,7 @@ import { format, parseISO } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR'
 
 import styles from './home.module.scss';
-import { PlayerContext } from '../contexts/PlayerContext';
+import { PlayerContext, usePlayer } from '../contexts/PlayerContext';
 // type or interface is the same
 type Episode = {
   id: string;
@@ -111,7 +110,13 @@ type HomeProps = {
 }
 
 export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
-  const { play } = useContext(PlayerContext)
+  const { playList } = usePlayer()
+
+  // Inside React ->Imutability Paradigma
+  // Ehen use a information inside React, the ideal is to copy  the anterior info
+  // and create a new one, rather than update the information. Performance stuffs  
+  const episodeList = [...latestEpisodes, ...allEpisodes] 
+
 
 
 // FORMAT THE DATA BEFORE THA DATA ARRIVED IN COMPONENT TO DISCOURAGE THE RENDERING EVERYTIME. Fotmat data very after the api response
@@ -124,7 +129,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
           {/* map execute something and return it. Foreach just runs and not returns anything */}
           {/* Doing a map to an html return, MUST HAVE AN UNIQUE KEY IN THE FIRST ELEMENT! */}
           {/* List with som many items, is so hard to manage the items to revove from the screen. --> PERFORMANCE! */}
-          {latestEpisodes.map(episode => {
+          {latestEpisodes.map((episode, index) => {
             return (
               <li key={episode.id}>
                 <Image 
@@ -145,7 +150,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                 </div>
 
                 {/* Functions that need parameters, we need to pass not just the name, but () => play(episode) */}
-                <button type="button" onClick={() => play(episode)}>
+                <button type="button" onClick={() => playList(episodeList, index)}>
                   <img src="/play-green.svg" alt="Play the episode" />
                 </button>
 
@@ -172,7 +177,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
             </thead>
 
             <tbody>
-              {allEpisodes.map(episode => {
+              {allEpisodes.map((episode, index) => {
                 return (
                   <tr key={episode.id}>
                     <td style={{ width: 72 }}>
@@ -193,7 +198,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                     <td style={{ width: 100 }}>{episode.publishedAt}</td>
                     <td>{episode.durationAsString}</td>
                     <td>
-                      <button type="button">
+                      <button type="button" onClick={() => playList(episodeList, index + latestEpisodes.length)}>
                         <img src="/play-green.svg" alt="Play episode" />
                       </button>
                     </td>

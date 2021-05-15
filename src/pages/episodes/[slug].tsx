@@ -9,6 +9,7 @@ import { api } from '../../services/api';
 import { convertDurationToTimeString } from '../../utils/convertDurationToTimeString';
 
 import styles from "./episode.module.scss";
+import {  usePlayer } from '../../contexts/PlayerContext';
 
 // Type represents the visual part in each component
 type Episode = {  // Manage with jpg and pngs in Next!
@@ -28,8 +29,9 @@ type EpisodeProps = {
 }
 
 export default function Episode({ episode }: EpisodeProps) {
-    const router = useRouter(); // React HOOK only used inside the component!
+    // const router = useRouter(); // React HOOK only used inside the component!
 
+    const {play} = usePlayer()
     return (
         <div className={styles.episode}>
             <div className={styles.thumbnailContainer}>
@@ -46,7 +48,7 @@ export default function Episode({ episode }: EpisodeProps) {
                     objectFit="cover"
                 />
 
-                <button type="button">
+                <button type="button" onClick={() => play(episode)}>
                     <img src="/play.svg" alt="Play episode" />
                 </button>
             </div>
