@@ -1,6 +1,6 @@
 # njs_podcastrnext-nlw5
 
-Aula 05 --> 33min
+Aula 05 --> 48min
 
 yarn add typescript @types/react @types/node -D 
 -D dev dependency
