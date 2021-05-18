@@ -16,3 +16,10 @@ package.json -> create script named "server"
 yarn add axios
 
 yarn add rc-slider
+
+
+Melhorias: 
+Responsivo, lidar com tabelas
+PWA, rodar ofline, app -> Next PWA
+Tema Dark, OMni, por exemplo
+Electron. App Desktop

@@ -84,6 +84,7 @@ export async function getStaticProps() {
 import { GetStaticProps } from 'next';
 import { convertDurationToTimeString } from '../utils/convertDurationToTimeString';
 import Image from 'next/image'; // Manage with jpg and pngs in Next!
+import Head from "next/head";
 import Link from 'next/link';
 import { api } from '../services/api';
 import { format, parseISO } from 'date-fns';
@@ -122,6 +123,10 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
 // FORMAT THE DATA BEFORE THA DATA ARRIVED IN COMPONENT TO DISCOURAGE THE RENDERING EVERYTIME. Fotmat data very after the api response
   return (
     <div className={styles.homePage}> 
+      <Head>
+        <title>Home | Podcastr</title>
+      </Head>
+
       <section className={styles.latestEpisodes}>
         <h2>Last Releases</h2>
 
